@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+<!--    <changeSet author="sulav-paudel" id="01-invoice_reference_ids">-->
+<!--        <createTable tableName="invoice_reference_ids">-->
+<!--            <column name="user_id" type="BIGINT">-->
+<!--                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_reference_composite"/>-->
+<!--            </column>-->
+<!--            <column name="year" type="INT">-->
+<!--                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_reference_composite"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+    <changeSet author="sulav-paudel" id="01-invoice_reference">
+        <createTable tableName="invoice_reference">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_reference_composite"/>
+            </column>
+            <column name="year" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_reference_composite"/>
+            </column>
+            <column name="latest_sequence" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="latest_invoice_number" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+<!--    <changeSet author="SulavP" id="03-invoice_reference_ids">-->
+<!--        <addPrimaryKey columnNames="user_id, year"-->
+<!--                       constraintName="PK_reference_composite"-->
+<!--                       tableName="invoice_reference"-->
+<!--                       validate="true"/>-->
+<!--    </changeSet>-->
+</databaseChangeLog>

@@ -1,0 +1,42 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="liquibase/entity/users.xml" />
+    <include file="liquibase/entity/roles.xml" />
+    <include file="liquibase/entity/users_roles.xml" />
+    <include file="liquibase/entity/privilege.xml" />
+    <include file="liquibase/entity/roles_privileges.xml" />
+    <include file="liquibase/entity/user_verification_token.xml" />
+    <include file="liquibase/entity/user_reset_password_token.xml" />
+    <include file="liquibase/entity/user_password_history.xml" />
+    <include file="liquibase/entity/audit_activity_record.xml" />
+    <include file="liquibase/entity/images.xml" />
+    <include file="liquibase/entity/categories.xml" />
+    <include file="liquibase/entity/products.xml" />
+    <include file="liquibase/entity/tags.xml" />
+    <include file="liquibase/entity/products_tags.xml"/>
+    <include file="liquibase/entity/product_stocks.xml" />
+    <include file="liquibase/entity/brands.xml" />
+    <include file="liquibase/entity/carts.xml"/>
+    <include file="liquibase/entity/cart_details.xml"/>
+    <include file="liquibase/entity/user_employees.xml"/>
+    <include file="liquibase/entity/user_retailers.xml"/>
+    <include file="liquibase/entity/employee_retailers.xml"/>
+    <include file="liquibase/entity/user_wishlist.xml"/>
+    <include file="liquibase/entity/orders.xml" />
+    <include file="liquibase/entity/order_details.xml"/>
+    <include file="liquibase/entity/invoice_references.xml"/>
+    <include file="liquibase/entity/coupons.xml"/>
+    <include file="liquibase/entity/payments.xml"/>
+    <include file="liquibase/entity/featured_images.xml"/>
+    <include file="liquibase/entity/check_in_check_out_logs.xml"/>
+
+    <include file="liquibase/entity/triggers.xml"/>
+<!--    <include file="liquibase/entity/procedures.xml"/>-->
+    <include file="liquibase/entity/views.xml"/>
+
+
+</databaseChangeLog>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="now" value="now()"/>
+
+    <changeSet author="sulav-paudel" id="01-products">
+        <createTable tableName="products">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_product_user" references="users(id)"/>
+            </column>
+            <column name="category_id" type="BIGINT" >
+                <constraints nullable="false" foreignKeyName="fk_product_category" references="categories(id)"/>
+            </column>
+            <column name="brand_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_sku" type="VARCHAR(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="slug" type="VARCHAR(100)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="mrp" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="true"/>
+            </column>
+            <column name="product_weight" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="true"/>
+            </column>
+            <column name="reward_points_credit" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="true"/>
+            </column>
+            <column name="description" type="LONGTEXT" defaultValue="null" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="shipping_and_delivery" type="LONGTEXT" defaultValue="null" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="payment_and_return" type="LONGTEXT" defaultValue="null" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="product_condition" type="VARCHAR(50)" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="available_stock" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deal" type="boolean" valueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deactivated_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_by" type="BIGINT" />
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="BIGINT" defaultValue="null" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

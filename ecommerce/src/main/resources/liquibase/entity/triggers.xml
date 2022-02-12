@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet  author="sulav-paudel" id="01-createTrigger-productStock">
+        <sql>
+            DROP TRIGGER IF EXISTS trg_ins_product_stocks_update_products;
+
+            CREATE TRIGGER trg_ins_product_stocks_update_products
+            AFTER INSERT ON product_stocks
+            FOR EACH ROW
+
+                UPDATE products
+                    SET available_stock = NEW.new_stock,
+                        updated_by = NEW.updated_by,
+                        updated_date = LOCALTIMESTAMP()
+                WHERE id = NEW.product_id;
+        </sql>
+        <rollback>
+            DROP TRIGGER trg_ins_product_stocks_update_products;
+        </rollback>
+    </changeSet>
+
+    <changeSet  author="sulav-paudel" id="01-createTrigger-payment">
+        <sql endDelimiter="\$\$">
+            DROP TRIGGER IF EXISTS trg_ins_payment_update_order;
+
+            $$
+            CREATE TRIGGER trg_ins_payment_update_order
+            AFTER INSERT ON payments
+            FOR EACH ROW
+            BEGIN
+
+                UPDATE orders
+                SET amount_paid = amount_paid + NEW.amount,
+                    amount_remaining = amount_remaining - NEW.amount,
+                    updated_date = LOCALTIMESTAMP()
+                WHERE id = NEW.order_id
+                AND user_id = NEW.user_id;
+            END;
+            $$
+        </sql>
+        <rollback>
+            DROP TRIGGER trg_ins_payment_update_order;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

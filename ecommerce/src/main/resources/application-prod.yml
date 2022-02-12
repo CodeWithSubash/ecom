@@ -1,0 +1,27 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ecommerce?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+        username: root
+        password: S0ftW3b
+    mail:
+        default-encoding: UTF-8
+        protocol: smtp
+        host: smtp.mailtrap.io
+        port: 587
+        username: d71c75d5372b41
+        password: 2102b5de12a396
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+server:
+    port: 8081
+email:
+    app-url: localhost:3000
+## File Storage Properties
+# All files uploaded through the REST API will be stored in this directory
+file:
+    upload-dir: C:\Ecommerce\images

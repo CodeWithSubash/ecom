@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="now" value="now()"/>
+
+    <changeSet author="sulav-paudel" id="01-user_employees">
+        <createTable tableName="user_employees">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_user_employees_user" references="users(id)"/>
+            </column>
+            <column name="username" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="firstname" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="lastname" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true" uniqueConstraintName="uc_user_email"/>
+            </column>
+            <column name="designation" type="VARCHAR(30)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="mobile" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="alternative_phone" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="alternative_mobile" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="street" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="street2" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="city" type="VARCHAR(25)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="state" type="VARCHAR(50)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="zip_code" type="VARCHAR(25)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="commission" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+<!--    <changeSet id="02-user_employees" author="SulavP">-->
+<!--        <addColumn tableName="user_employees">-->
+<!--            <column name="designation" type="VARCHAR(30)" defaultValue="null">-->
+<!--                <constraints nullable="true"/>-->
+<!--            </column>-->
+<!--        </addColumn>-->
+<!--    </changeSet>-->
+</databaseChangeLog>

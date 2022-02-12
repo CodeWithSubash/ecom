@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="now" value="now()"/>
+
+    <changeSet author="sulav-paudel" id="01-brands">
+        <createTable tableName="brands">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_date" type="DATETIME" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_by" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_brands_user_01" references="users(id)"/>
+            </column>
+            <column name="created_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="BIGINT" defaultValue="null" >
+                <constraints nullable="true" foreignKeyName="fk_brands_user_02" references="users(id)"/>
+            </column>
+            <column name="updated_date" type="DATETIME" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

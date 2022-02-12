@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="now" value="now()"/>
+
+    <changeSet author="sulav-paudel" id="01-user_retailers">
+        <createTable tableName="user_retailers">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_user_retailers_user" references="users(id)"/>
+            </column>
+            <column name="logo" type="LONGTEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="business_name" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="trading_status" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="business_address" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="landline" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="mobile" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="fax" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="date_of_corporation" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="share_holders" type="VARCHAR(255)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="directors" type="VARCHAR(255)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="bank_name" type="VARCHAR(100)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="bank_address" type="VARCHAR(255)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="banker_contact_person" type="VARCHAR(50)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="banker_contact_number" type="VARCHAR(20)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="document_id_number" type="VARCHAR(50)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="document_id_certificate" type="LONGTEXT" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="business_registration_number" type="VARCHAR(50)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="business_registration_certificate" type="LONGTEXT" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="vat_registration_number" type="VARCHAR(50)" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="vat_registration_certificate" type="LONGTEXT" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="notes" type="LONGTEXT" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="status" type="boolean" valueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

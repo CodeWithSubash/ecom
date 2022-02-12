@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet  author="sulav-paudel"  id="createView-employeeRecord">
+        <createView  encoding="UTF-8"
+                     fullDefinition="false"
+                     relativeToChangelogFile="true"
+                     remarks="A view to get the record for dashboard"
+                     replaceIfExists="true"
+                     viewName="v_employee_record">
+
+            SELECT user_employees.id, user_employees.user_id, firstname, lastname, email, designation, phone, mobile, city, state, zip_code,
+            commission,
+            COUNT(orders.order_placed_user_id) AS total_order,
+            IFNULL(SUM(orders.total_amount), 0) AS total_revenue,
+            IFNULL(SUM(orders.discount_amount), 0) AS total_discount_amount,
+            IFNULL(currentOrder.curOrder, 0) AS current_order,
+            IFNULL(currentOrder.total_amount, 0) AS current_total_amount,
+            IFNULL(currentOrder.discount_amount, 0) AS current_discount_amount,
+            IFNULL(previousOrder.preOrder, 0) AS previous_order,
+            IFNULL(previousOrder.total_amount, 0) AS previous_total_amount,
+            IFNULL(previousOrder.discount_amount, 0) AS previous_discount_amount
+            FROM user_employees
+            LEFT JOIN orders on orders.order_placed_user_id = user_employees.user_id
+            LEFT JOIN (
+            SELECT order_placed_user_id, COUNT(order_placed_user_id) AS curOrder, SUM(total_amount) AS total_amount, SUM(discount_amount) AS discount_amount
+            FROM orders
+            WHERE
+            YEAR(created_date) = YEAR(NOW())
+            AND MONTH(created_date) = MONTH(NOW())
+            GROUP BY order_placed_user_id) currentOrder ON currentOrder.order_placed_user_id = user_employees.user_id
+            LEFT JOIN (
+            SELECT order_placed_user_id, COUNT(order_placed_user_id) AS preOrder, SUM(total_amount) AS total_amount, SUM(discount_amount) AS discount_amount
+            FROM orders
+            WHERE
+            YEAR(created_date) = YEAR(NOW() - INTERVAL 1 MONTH)
+            AND MONTH(created_date) = MONTH(NOW() - INTERVAL 1 MONTH)
+            GROUP BY order_placed_user_id) previousOrder ON previousOrder.order_placed_user_id = user_employees.user_id
+            GROUP BY user_employees.id, orders.order_placed_user_id;
+
+        </createView>
+    </changeSet>
+
+    <changeSet  author="sulav-paudel"  id="createView-retailerRecord">
+        <createView  encoding="UTF-8"
+                     fullDefinition="false"
+                     relativeToChangelogFile="true"
+                     remarks="A view to get the record for retailer dashboard"
+                     replaceIfExists="true"
+                     viewName="v_retailer_record">
+
+            SELECT user_retailers.id, user_retailers.user_id, business_name,
+                IFNULL(orders.order_count, 0) AS order_count,
+                IFNULL(orders.total_amount, 0) AS total_amount,
+                IFNULL(wishList.wishlist_count, 0) AS wishlist_count
+            FROM user_retailers
+            LEFT JOIN
+                (SELECT user_id, COUNT(orders.id) AS order_count, SUM(grand_total_amount) AS total_amount  FROM orders GROUP BY user_id) AS orders
+                ON orders.user_id = user_retailers.user_id
+            LEFT JOIN
+                (SELECT user_id, COUNT(product_id) AS wishlist_count FROM wishList GROUP BY user_id) AS wishList
+                ON wishList.user_id = user_retailers.user_id
+
+        </createView>
+    </changeSet>
+</databaseChangeLog>

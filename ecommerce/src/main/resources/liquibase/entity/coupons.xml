@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet author="sulav-paudel" id="01-coupons">
+        <createTable tableName="coupons">
+            <column name="uuid" type="BINARY(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="true" foreignKeyName="fk_coupon_user" references="users(id)"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="true" foreignKeyName="fk_coupon_category" references="categories(id)"/>
+            </column>
+            <column name="coupon_code" type="VARCHAR(15)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="coupon_type" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount_value" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="minimum_order_value" type="BIGINT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="maximum_discount_amount" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid_from" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="valid_until" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_redeem_allowed" type="boolean" valueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

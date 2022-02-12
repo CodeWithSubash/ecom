@@ -1,0 +1,32 @@
+spring:
+    application:
+        name: ecommerce
+    profiles:
+        active: prod
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: none
+
+    servlet:
+        multipart:
+            enabled: true
+            file-size-threshold: 2MB
+            max-file-size: 200MB
+
+            max-request-size: 215MB
+    liquibase:
+        enabled: true
+        change-log: classpath:liquibase/master.xml
+server:
+    port: 8081
+email:
+    app-url: localhost:3000
+jwt:
+    refreshToken:
+        expiresIn: 172800000
+        secretKey: bZnoIcVsWCM7HvjTSMaNJ26SPsXBMU5pHzu8NxWIU1XkxCw1vn
+    accessToken:
+        expiresIn: 86400000
+        secretKey: ulll60BDXyO3OoGHuaRikY4ESOgXnrEotljOc4uJEI1ZZWlsKr
+

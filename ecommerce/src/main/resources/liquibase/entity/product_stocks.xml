@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <property name="autoIncrement" value="true"/>
+    <property name="now" value="now()"/>
+
+    <changeSet author="sulav-paudel" id="01-product_stocks">
+        <createTable tableName="product_stocks">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="old_stock" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="change_stock" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="new_stock" type="DECIMAL" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="change_type" type="VARCHAR(50)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="remarks" type="VARCHAR(50)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_by" type="BIGINT" />
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="BIGINT" defaultValue="null" >
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_date" type="datetime" defaultValue="null">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
